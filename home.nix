@@ -7,6 +7,7 @@
     neovim 
     zsh
     git
+    gh
   ];
 
   programs.bash.enable = false;
@@ -15,10 +16,13 @@
     enableCompletion = true;
   };
 
-  programs.git.config = {
-    user.name = "Miguel Tinembart";
-    user.email = "miguel.tinembart@gmail.com";
-  };
+  programs.git = {
+    enable = true;
+    extraConfig = {
+      user.name = "Miguel Tinembart";
+      user.email = "miguel.tinembart@gmail.com";
+    };
+  }; 
   
   # The state version is required and should stay at the version you
   # originally installed.
