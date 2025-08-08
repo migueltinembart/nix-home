@@ -1,6 +1,7 @@
-{ config, pkgs, ... }: 
-{
-
+{ config, pkgs, ... }: {
+  
+  home.username = "migueltinembart";
+  home.homeDirectory = "/home/migueltinembart";
   home.packages = with pkgs; [ 
     atool 
     httpie 
@@ -12,15 +13,24 @@
     ghostty
     floorp
     devcontainer
-    helix
+    gopls
+    oh-my-zsh
+    vscode
+    kind
+    kubectl
+    google-chrome
+    thunderbird
   ];
-
-  programs.bash.enable = false;
+  nixpkgs.config.allowUnfree = true;
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-  };
+    oh-my-zsh = {
+      enable = true;
+      theme = "agnoster";
+    };
 
+  };
 
   programs.git = {
     enable = true;

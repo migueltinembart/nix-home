@@ -14,7 +14,6 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      
       (import "${home-manager}/nixos")
     ];
 
@@ -32,10 +31,10 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
-
+  
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
-
+  
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -62,7 +61,6 @@ in
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -83,14 +81,27 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.migueltinembart = {
     isNormalUser = true;
     description = "Miguel tinembart";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    
+    shell = pkgs.zsh;
   };
 
+
+  security.sudo.extraRules = [
+    {
+      users = [ "migueltinembart" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+	      }
+      ];
+    }
+  ];  
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -135,8 +146,6 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
+  
   home-manager.users.migueltinembart = import ./home.nix;
-
-
 }
