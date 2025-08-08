@@ -8,6 +8,11 @@
     zsh
     git
     gh
+    fastfetch
+    ghostty
+    floorp
+    devcontainer
+    helix
   ];
 
   programs.bash.enable = false;
@@ -15,6 +20,7 @@
     enable = true;
     enableCompletion = true;
   };
+
 
   programs.git = {
     enable = true;

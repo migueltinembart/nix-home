@@ -87,7 +87,7 @@ in
   users.users.migueltinembart = {
     isNormalUser = true;
     description = "Miguel tinembart";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     
   };
 
@@ -102,7 +102,12 @@ in
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+  docker
   ];
+
+  # enable the docker daemon as this requires the system
+
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
